@@ -15,7 +15,7 @@ def imap_init():
     global i
     i = imapclient.IMAPClient(imapserver)
     c = i.login(radr, pwd)
-    i.select_folder("INBOX", readonly=True)
+    i.select_folder("INBOX", readonly=False)
     print("Done. ")
 
 def smtp_init():
@@ -72,8 +72,13 @@ def analyze_msg(raws, a):
         return None
     text = msg.text_part.get_payload().decode(msg.text_part.charset)
     cmds = text.replace('\r', '').split('\n')  # Remove any \r and split on \n
-    if cmds[0] not in commands:
-        print("Command %s is not in commands" % cmds[0])
+    foundcmd = False
+
+    for i in commands.keys():
+        if i in cmds[0]:
+            foundcmd = True
+    if not foundcmd:
+        print("Command not found")
         return False
     else:
         return cmds
@@ -117,7 +122,8 @@ while True:  # Main loop
                 continue
             else:
                 print("Command received: \n%s" % cmds)
-                r = commands[cmds[0]](cmds)
+                fncalls = [commands[i] for i in commands if i in cmds[0]]
+                r = fncalls[0](cmds[0])
             mail(str(r))
             print("Command successfully completed! ")
     except KeyboardInterrupt:

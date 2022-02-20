@@ -1,4 +1,5 @@
 import getpass
+import wikipedia
 
 radr = input("Adresses to log in to")  # address to check and send from
 imapserver = input("IMAP server domain: ")  # imap server for account
@@ -12,4 +13,10 @@ check_freq = 5
 def hello_world(lines):
     return "Hello, World! "
 
-commands = {"hello" : hello_world}
+def wikicontent(lines):
+    q = lines[10:]
+    page = wikipedia.page(wikipedia.search(q)[0])
+    content = page.content
+    return content
+
+commands = {"hello" : hello_world, "wikipedia": wikicontent}
