@@ -6,6 +6,12 @@ import smtplib
 import time
 
 subject = "Python"
+radr = 'opencell2022@gmail.com'
+imapserver = 'imap.gmail.com'
+smtpserver = 'imap.gmail.com'
+smtpserverport = 465
+pwd = 'treehacks2022'
+sadr = 'rheanano16@gmail.com'
 
 def imap_init():
     """
@@ -24,7 +30,7 @@ def smtp_init():
     """
     print("Initializing SMTP...")
     global s
-    s = smtplib.SMTP_SSL(smtpserver, smtpserverport)
+    s = smtplib.SMTP_SSL(imapserver, smtpserverport)
     s.ehlo()
     """c = s.starttls()[0]  # The returned status code
     if c is not 220:
