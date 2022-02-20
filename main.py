@@ -24,10 +24,11 @@ def smtp_init():
     """
     print("Initializing SMTP...")
     global s
-    s = smtplib.SMTP(smtpserver, smtpserverport)
-    c = s.starttls()[0]  # The returned status code
+    s = smtplib.SMTP_SSL(smtpserver, smtpserverport)
+    s.ehlo()
+    """c = s.starttls()[0]  # The returned status code
     if c is not 220:
-        raise Exception('Starting tls failed: ' + str(c))
+        raise Exception('Starting tls failed: ' + str(c))"""
     c = s.login(radr, pwd)[0]
     if c is not 235:
         raise Exception('SMTP login failed: ' + str(c))
