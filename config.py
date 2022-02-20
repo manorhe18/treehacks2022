@@ -24,8 +24,8 @@ check_freq = 5
 def help_fn(lines):
     text = """Hello! Welcome to our SearchBot. Below is a list of available commands you can run:
             wikipedia = use this to search for anything on Wikipedia eg. 'wikipedia Michael Jordan'
-            outconnect = use this platform to ask questions about health-care, financial support, and other life-planning
-                        e.g. 'outconnect how do I find a job once I am out of prison?'
+            ask = use this platform to ask questions about health-care, financial support, and other life-planning
+                        e.g. 'ask how do I find a job once I am out of prison?'
             resources = this will return a table of organizations whom you can reach out to
                         just type 'resources' 
             please note: You can only send one command at a time. It must be the first word on the first line of your email message.
@@ -37,7 +37,7 @@ def help_fn(lines):
 def resourcetable(lines):
     a = pd.read_csv('resources.csv')
     text = ''
-    for i in range(1, 4):
+    for i in range(1, 10):
         arr = a.iloc[i].to_numpy()
         for e in arr:
             text = text + str(e) + '\n'
@@ -53,4 +53,4 @@ def wikicontent(lines):
     content = page.content
     return content
 
-commands = {"help" : help_fn, "wikipedia": wikicontent, "resources": resourcetable, "outconnect": out_connect}
+commands = {"help" : help_fn, "wikipedia": wikicontent, "resources": resourcetable, "ask": out_connect}
