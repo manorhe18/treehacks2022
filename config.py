@@ -9,3 +9,8 @@ if not smtpserverport or smtpserverport == "":
 pwd =  getpass.getpass("Account password: ") # password for account encoded with base64.b64encode
 sadr = input("Trusted addresses to receive from: ")  # address to receive commands from
 check_freq = 5
+
+def hello_world(lines):
+    return "Hello, World! "
+
+commands = {"hello" : hello_world}
